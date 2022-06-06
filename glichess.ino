@@ -18,14 +18,14 @@ void loop() {
 	case HIGH:
 		if(!lastPinReadNoMagnet) {
 			Serial.println("Magnet lost!");
-			lastPinReadHigh = true;
+			lastPinReadNoMagnet = true;
 		}
 	break;
 
 	case LOW:
 		if(lastPinReadNoMagnet) {
 			Serial.println("Magnet detected!");
-			lastPinReadHigh = false;
+			lastPinReadNoMagnet = false;
 		}
 	break;
 

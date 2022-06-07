@@ -1,10 +1,10 @@
 namespace {
-	const unsigned int sensorPin = 2;
+	const unsigned int SENSOR_PIN = 2;
 	bool lastPinReadNoMagnet = true;
 }
 
 void setup() {
-	pinMode(sensorPin, INPUT);
+	pinMode(SENSOR_PIN, INPUT);
 
 	Serial.begin(9600);
 	while(!Serial) {
@@ -14,7 +14,7 @@ void setup() {
 
 
 void loop() {
-	switch(digitalRead(sensorPin)) {
+	switch(digitalRead(SENSOR_PIN)) {
 	case HIGH:
 		if(!lastPinReadNoMagnet) {
 			Serial.println("Magnet lost!");

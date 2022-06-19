@@ -1,3 +1,6 @@
+#include "Arduino.h"
+
+
 class Sensor {
 private:
 	const unsigned char PIN;

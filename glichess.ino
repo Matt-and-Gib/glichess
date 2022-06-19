@@ -23,7 +23,7 @@ namespace {
 
 
 void setup() {
-	for(const Sensor sensor : sensors) {
+	for(const Sensor& sensor : sensors) {
 		pinMode(sensor.getPin(), INPUT);
 	}
 

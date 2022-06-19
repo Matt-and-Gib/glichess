@@ -1,36 +1,62 @@
+class Sensor {
+private:
+	const unsigned char PIN;
+
+public:
+	enum class READ_STATE {NOTHING_DETECTED, MAGNET_DETECTED};
+	READ_STATE lastReadState;
+	unsigned char getPin() const {return PIN;}
+
+	Sensor(const unsigned char pin) :
+		PIN(pin),
+		lastReadState(READ_STATE::NOTHING_DETECTED)
+	{}
+};
+
+
 namespace {
-	const unsigned int SENSOR_PIN = 2;
-	bool lastPinReadNoMagnet = true;
+	Sensor sensors[2] = {Sensor(2), Sensor(21)};
 }
 
+
 void setup() {
-	pinMode(SENSOR_PIN, INPUT);
+	for(const Sensor sensor : sensors) {
+		pinMode(sensor.getPin(), INPUT);
+	}
 
 	Serial.begin(9600);
 	while(!Serial) {
-		delay(250);
+		delay(100);
 	}
 }
 
 
 void loop() {
-	switch(digitalRead(SENSOR_PIN)) {
-	case HIGH:
-		if(!lastPinReadNoMagnet) {
-			Serial.println("Magnet lost!");
-			lastPinReadNoMagnet = true;
-		}
-	break;
+	for(Sensor& sensor : sensors) {
+		switch(digitalRead(sensor.getPin())) {
+		case HIGH:
+			//Serial.print(static_cast<int>(sensor.getPin())); Serial.println(F(" is HIGH"));
 
-	case LOW:
-		if(lastPinReadNoMagnet) {
-			Serial.println("Magnet detected!");
-			lastPinReadNoMagnet = false;
-		}
-	break;
+			if(sensor.lastReadState != Sensor::READ_STATE::NOTHING_DETECTED) {
+				Serial.print("Magnet lost by ");
+				Serial.println(static_cast<int>(sensor.getPin()));
+				sensor.lastReadState = Sensor::READ_STATE::NOTHING_DETECTED;
+			}
+		break;
 
-	default:
-		Serial.println("Unknown read state!");
-	break;
+		case LOW:
+			//Serial.print(static_cast<int>(sensor.getPin())); Serial.println(F(" is LOW"));
+
+			if(sensor.lastReadState != Sensor::READ_STATE::MAGNET_DETECTED) {
+				Serial.print(F("Magnet detected by "));
+				Serial.println(static_cast<int>(sensor.getPin()));
+				sensor.lastReadState = Sensor::READ_STATE::MAGNET_DETECTED;
+			}
+		break;
+
+		default:
+			Serial.println("Unknown read state!");
+		break;
+		}
 	}
 }

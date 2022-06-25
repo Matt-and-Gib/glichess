@@ -2,15 +2,19 @@
 
 Us too. Here's the plan:
 
-1. [Bill of Materials](#bom)
+1. [Material List](#materials)
 2. [Wiring Guide](#wiring)
 3. [Intro to the Code](#code)
 4. [Playing](#playing)
 5. [If Something Goes Wrong](#help)
 
-## <a name="bom"></a>Bill of Materials
+## <a name="materials"></a>Material List
 
-To do
+|Quantity|Part|Use|
+|--------|----|---|
+|x1|[8" x 8" Chess Set](https://www.spinmaster.com/en-US/brands/spin-master-games/clear-chess-and-checkers-set-with-glass-gameboard-for-adults-and-kids-ages-8-and-up)|Base chess board with accompanying pieces|
+|x32|[5/16" x 1/16" Neodymium Disc Magnets N52](https://totalelement.com/collections/disc-magnets/products/5-16-x-1-16-inch-neodymium-rare-earth-disc-magnets-n52-100-pack)|Make chess pieces detectable by Hall Effect sensor|
+|x32|[AH3582-P-A Hall Effect Sensor](https://www.digikey.com/en/products/detail/diodes-incorporated/AH3582-P-A/9649758)|Detect magnets|
 
 ## <a name="wiring"></a>Wiring Guide
 

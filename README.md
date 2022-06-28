@@ -1,5 +1,7 @@
 # Want to build a digital chess board?
 
+![glichess Banner](./resources/glichess_social.jpg)
+
 Us too. Here's the plan:
 
 1. [Material List](#materials)

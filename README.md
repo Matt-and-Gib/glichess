@@ -1,8 +1,10 @@
 # Want to build a digital chess board?
 
+Us too. Introducing glichess!
+
 ![glichess Banner](./resources/glichess_social.jpg)
 
-Us too. Here's the plan:
+Here's the plan:
 
 1. [Material List](#materials)
 2. [Wiring Guide](#wiring)

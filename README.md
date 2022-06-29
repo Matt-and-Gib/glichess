@@ -1,6 +1,6 @@
-# Want to build a digital chess board?
+# Want to build a connected chess board?
 
-Us too. Introducing glichess!
+Us too. Introducing: glichess!
 
 ![glichess Banner](./resources/glichess_social.jpg)
 

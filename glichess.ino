@@ -1,32 +1,40 @@
 #include "Arduino.h"
 
 
+//This could simply be a boolean value (or enum), but treating it as an object will give us more flexibility in the future.
 class HallEffectSensor {
-private:
-	const unsigned char PIN;
-
 public:
-	enum class READ_STATE {NOTHING_DETECTED, MAGNET_DETECTED};
+	enum class READ_STATE : bool {NOTHING_DETECTED, MAGNET_DETECTED};
 	READ_STATE lastReadState;
-	unsigned char getPin() const {return PIN;}
 
-	HallEffectSensor(const unsigned char pin) :
-		PIN(pin),
+	HallEffectSensor() :
 		lastReadState(READ_STATE::NOTHING_DETECTED)
 	{}
 };
 
 
 namespace {
-	HallEffectSensor sensors[2] = {HallEffectSensor(2), HallEffectSensor(21)};
+	const static constexpr unsigned char RANK_SIZE = 3;
+	const static constexpr unsigned char FILE_SIZE = 3;
+	HallEffectSensor sensors[RANK_SIZE][FILE_SIZE] = {
+		{HallEffectSensor(), HallEffectSensor(), HallEffectSensor()},
+		{HallEffectSensor(), HallEffectSensor(), HallEffectSensor()},
+		{HallEffectSensor(), HallEffectSensor(), HallEffectSensor()}
+	};
+	const static constexpr unsigned char POWER_PINS[RANK_SIZE] = {19, 20, 21};
+	const static constexpr unsigned char READ_PINS[FILE_SIZE] = {2, 3, 4};
 }
 
 
 void setup() {
 	Serial.begin(9600);
 
-	for(const HallEffectSensor& sensor : sensors) {
-		pinMode(sensor.getPin(), INPUT);
+	for(const unsigned char pin : POWER_PINS) {
+		pinMode(pin, OUTPUT);
+	}
+
+	for(const unsigned char pin : READ_PINS) {
+		pinMode(pin, INPUT);
 	}
 
 	while(!Serial) {
@@ -35,32 +43,28 @@ void setup() {
 }
 
 
-void loop() {
-	for(HallEffectSensor& sensor : sensors) {
-		switch(digitalRead(sensor.getPin())) {
-		case HIGH:
-			//Serial.print(static_cast<int>(sensor.getPin())); Serial.println(F(" is HIGH"));
-
-			if(sensor.lastReadState != HallEffectSensor::READ_STATE::NOTHING_DETECTED) {
-				Serial.print("Magnet lost by ");
-				Serial.println(static_cast<int>(sensor.getPin()));
-				sensor.lastReadState = HallEffectSensor::READ_STATE::NOTHING_DETECTED;
-			}
-		break;
-
-		case LOW:
-			//Serial.print(static_cast<int>(sensor.getPin())); Serial.println(F(" is LOW"));
-
-			if(sensor.lastReadState != HallEffectSensor::READ_STATE::MAGNET_DETECTED) {
-				Serial.print(F("Magnet detected by "));
-				Serial.println(static_cast<int>(sensor.getPin()));
-				sensor.lastReadState = HallEffectSensor::READ_STATE::MAGNET_DETECTED;
-			}
-		break;
-
-		default:
-			Serial.println("Unknown read state!");
-		break;
+void UpdatePinValues() {
+	for(const unsigned char rank : POWER_PINS) {
+		digitalWrite(rank, PinStatus::HIGH);
+		for(const unsigned char file : READ_PINS) {
+			sensors[rank][file].lastReadState = (digitalRead(file) == PinStatus::HIGH ? HallEffectSensor::READ_STATE::MAGNET_DETECTED : HallEffectSensor::READ_STATE::NOTHING_DETECTED);
 		}
+		digitalWrite(rank, PinStatus::LOW);
 	}
+}
+
+void CheckPinValues() {
+	for(const HallEffectSensor (&rank)[RANK_SIZE] : sensors) {
+		for(const HallEffectSensor fileSensor : rank) {
+			Serial.print(F((fileSensor.lastReadState == HallEffectSensor::READ_STATE::MAGNET_DETECTED) ? "X" : "O"));
+		}
+		Serial.println();
+	}
+	Serial.println();
+}
+
+
+void loop() {
+	UpdatePinValues();
+	CheckPinValues();
 }

@@ -21,7 +21,7 @@ namespace {
 		{HallEffectSensor(), HallEffectSensor(), HallEffectSensor()},
 		{HallEffectSensor(), HallEffectSensor(), HallEffectSensor()}
 	};
-	const static constexpr unsigned char POWER_PINS[RANK_SIZE] = {19, 20, 21};
+	const static constexpr unsigned char POWER_PINS[RANK_SIZE] = {21, 20, 19};
 	const static constexpr unsigned char READ_PINS[FILE_SIZE] = {2, 3, 4};
 }
 
@@ -47,7 +47,8 @@ void UpdatePinValues() {
 	for(const unsigned char rank : POWER_PINS) {
 		digitalWrite(rank, PinStatus::HIGH);
 		for(const unsigned char file : READ_PINS) {
-			sensors[rank][file].lastReadState = (digitalRead(file) == PinStatus::HIGH ? HallEffectSensor::READ_STATE::MAGNET_DETECTED : HallEffectSensor::READ_STATE::NOTHING_DETECTED);
+			Serial.println(digitalRead(file));
+			sensors[rank][file].lastReadState = (digitalRead(file) == PinStatus::LOW ? HallEffectSensor::READ_STATE::MAGNET_DETECTED : HallEffectSensor::READ_STATE::NOTHING_DETECTED);
 		}
 		digitalWrite(rank, PinStatus::LOW);
 	}
@@ -55,7 +56,7 @@ void UpdatePinValues() {
 
 void CheckPinValues() {
 	for(const HallEffectSensor (&rank)[RANK_SIZE] : sensors) {
-		for(const HallEffectSensor fileSensor : rank) {
+		for(const HallEffectSensor& fileSensor : rank) {
 			Serial.print(F((fileSensor.lastReadState == HallEffectSensor::READ_STATE::MAGNET_DETECTED) ? "X" : "O"));
 		}
 		Serial.println();

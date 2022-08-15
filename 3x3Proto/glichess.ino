@@ -1,4 +1,4 @@
-#include "Arduino.h"
+#include <Arduino.h>
 
 
 //This could simply be a boolean value (or enum), but treating it as an object will give us more flexibility in the future.
@@ -17,12 +17,14 @@ namespace {
 	const static constexpr unsigned char RANK_SIZE = 3;
 	const static constexpr unsigned char FILE_SIZE = 3;
 	HallEffectSensor sensors[RANK_SIZE][FILE_SIZE] = {
-		{HallEffectSensor(), HallEffectSensor(), HallEffectSensor()},
-		{HallEffectSensor(), HallEffectSensor(), HallEffectSensor()},
-		{HallEffectSensor(), HallEffectSensor(), HallEffectSensor()}
+		{ HallEffectSensor(), HallEffectSensor(), HallEffectSensor() },
+		{ HallEffectSensor(), HallEffectSensor(), HallEffectSensor() },
+		{ HallEffectSensor(), HallEffectSensor(), HallEffectSensor() }
 	};
 	const static constexpr unsigned char POWER_PINS[RANK_SIZE] = {21, 20, 19};
 	const static constexpr unsigned char READ_PINS[FILE_SIZE] = {2, 3, 4};
+	unsigned char rankIndex = 0;
+	unsigned char fileIndex = 0;
 }
 
 
@@ -44,15 +46,17 @@ void setup() {
 
 
 void UpdatePinValues() {
-	for(const unsigned char rank : POWER_PINS) {
-		digitalWrite(rank, PinStatus::HIGH);
-		for(const unsigned char file : READ_PINS) {
-			Serial.println(digitalRead(file));
-			sensors[rank][file].lastReadState = (digitalRead(file) == PinStatus::LOW ? HallEffectSensor::READ_STATE::MAGNET_DETECTED : HallEffectSensor::READ_STATE::NOTHING_DETECTED);
+	for(rankIndex = 0; rankIndex < RANK_SIZE; rankIndex += 1) {
+		digitalWrite(POWER_PINS[rankIndex], PinStatus::HIGH);
+		delay(10);
+		for(fileIndex = 0; fileIndex < FILE_SIZE; fileIndex += 1) {
+			sensors[rankIndex][fileIndex].lastReadState = (digitalRead(READ_PINS[fileIndex]) == PinStatus::LOW ? HallEffectSensor::READ_STATE::MAGNET_DETECTED : HallEffectSensor::READ_STATE::NOTHING_DETECTED);
 		}
-		digitalWrite(rank, PinStatus::LOW);
+		digitalWrite(POWER_PINS[rankIndex], PinStatus::LOW);
+		delay(10);
 	}
 }
+
 
 void CheckPinValues() {
 	for(const HallEffectSensor (&rank)[RANK_SIZE] : sensors) {

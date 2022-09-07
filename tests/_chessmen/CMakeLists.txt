@@ -33,7 +33,7 @@ set_tests_properties(
 	#queue_find_nonexistant
 	#queue_find_match
 	#queue_find_from_empty
-	PROPERTIES LABELS queue)
+	PROPERTIES LABELS chessmen)
 
 #add_test(success_test ${testname} 0)
 #set_tests_properties(success_test PROPERTIES PASS_REGULAR_EXPRESSION "SUCCESS")

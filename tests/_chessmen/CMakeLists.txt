@@ -1,38 +1,15 @@
-#Unit tests for chessmen.h
+#Unit tests for Chessmen
 
 SET(testname "chessmen")
-SET(testsource "ut_chessmen.cpp")
 
-add_executable(${testname} ${testsource})
+add_executable(${testname} "ut_pawn.cpp")
 target_include_directories(${testname} PRIVATE "${PROJECT_SOURCE_DIR}/src/include")
 set_target_properties(${testname} PROPERTIES LINKER_LANGUAGE CXX)
 
-#add_test(queue_no_children_count ${testname} 0)
-#add_test(queue_add_node ${testname} 1)
-#add_test(queue_one_child_count ${testname} 2)
-#add_test(queue_multiple_children_count ${testname} 3)
-#add_test(queue_enqueue_dequeue_order ${testname} 4)
-#add_test(queue_dequeue_empty ${testname} 5)
-#add_test(queue_dequeue_last ${testname} 6)
-#add_test(queue_dequeue_not_last ${testname} 7)
-#add_test(queue_enqueue_nullptr ${testname} 8)
-#add_test(queue_find_nonexistant ${testname} 9)
-#add_test(queue_find_match ${testname} 10)
-#add_test(queue_find_from_empty ${testname} 11)
+add_test(pawn ${testname} 0)
 
 set_tests_properties(
-	#queue_no_children_count
-	#queue_add_node
-	#queue_one_child_count
-	#queue_multiple_children_count
-	#queue_enqueue_dequeue_order
-	#queue_dequeue_empty
-	#queue_dequeue_last
-	#queue_dequeue_not_last
-	#queue_enqueue_nullptr
-	#queue_find_nonexistant
-	#queue_find_match
-	#queue_find_from_empty
+	pawn
 	PROPERTIES LABELS chessmen)
 
 #add_test(success_test ${testname} 0)

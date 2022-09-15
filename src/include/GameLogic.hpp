@@ -3,7 +3,7 @@
 
 #include "CoreComponent.hpp"
 
-namespace gleechess {
+namespace glichess {
 	class GameLogic : protected CoreComponent{
 	private:
 

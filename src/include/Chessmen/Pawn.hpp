@@ -3,7 +3,7 @@
 
 #include "ChessPiece.hpp"
 
-namespace gleechess {
+namespace glichess {
 	class Pawn : protected ChessPiece {
 	private:
 

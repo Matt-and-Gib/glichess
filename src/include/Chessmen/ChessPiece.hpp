@@ -1,7 +1,7 @@
 #ifndef CHESSPIECE_H
 #define CHESSPIECE_H
 
-namespace gleechess {
+namespace glichess {
 	class ChessPiece {
 	public:
 		

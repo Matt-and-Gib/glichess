@@ -1,7 +1,7 @@
 #ifndef CORECOMPONENT_H
 #define CORECOMPONENT_H
 
-namespace gleechess {
+namespace glichess {
 	class CoreComponent {
 	public:
 		virtual void StartUp() = 0;

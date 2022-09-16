@@ -4,7 +4,7 @@
 namespace glichess {
 	class CoreComponent {
 	public:
-		virtual void StartUp() = 0;
+		virtual void Initialize() = 0;
 		virtual void Update() = 0;
 	};
 }

@@ -8,7 +8,7 @@ namespace glichess {
 	private:
 
 	public:
-		void StartUp() override;
+		void Initialize() override;
 		void Update() override;
 	};
 }

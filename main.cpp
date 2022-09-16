@@ -67,7 +67,5 @@ int main(void) {
 		arduino::serialEventRun();
 	}
 
-	delay(4000);
-	display->clearAll();
 	return 0;
 }

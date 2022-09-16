@@ -7,13 +7,11 @@
 namespace glichess {
 	class ChessPiece {
 	public:
-		ChessPiece(const Side team, const unsigned char startPositionX, const unsigned char startPositionY):
-			side{team},
+		ChessPiece(const Side color, const unsigned char startPositionX, const unsigned char startPositionY):
+			side{color},
 			positionX{startPositionX},
 			positionY{startPositionY}
-		{
-
-		}
+		{}
 		virtual ~ChessPiece() = default;
 
 		virtual void MoveTo(const unsigned char coordinateX, const unsigned char coordinateY) = 0;

@@ -6,7 +6,7 @@
 namespace glichess {
 	class Pawn : protected ChessPiece {
 	public:
-		Pawn(const Side team, const unsigned char startPositionX, const unsigned char startPositionY): ChessPiece(team, startPositionX, startPositionY) {}
+		Pawn(const Side color, const unsigned char startPositionX, const unsigned char startPositionY): ChessPiece(color, startPositionX, startPositionY) {}
 
 		void MoveTo(const unsigned char coordinateX, const unsigned char coordinateY) {}
 	};

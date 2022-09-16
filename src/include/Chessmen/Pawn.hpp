@@ -5,9 +5,10 @@
 
 namespace glichess {
 	class Pawn : protected ChessPiece {
-	private:
-
 	public:
+		Pawn(const Side team, const unsigned char startPositionX, const unsigned char startPositionY): ChessPiece(team, startPositionX, startPositionY) {}
+
+		void MoveTo(const unsigned char coordinateX, const unsigned char coordinateY) {}
 	};
 }
 

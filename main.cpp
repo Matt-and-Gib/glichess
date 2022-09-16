@@ -12,15 +12,29 @@ extern USBDeviceClass USBDevice;
 extern "C" void __libc_init_array(void);
 
 
+void clearSerialInputBuffer() {
+	while(Serial.available()) {
+		Serial.read();
+	}
+}
+
+
 void Initialize(glichess::GameLogic*& gameLogic) {
-	println(F("Initialize!"));
+	Serial.begin(9600);
+	while(!Serial) {
+		delay(100);
+	}
+
+	clearSerialInputBuffer();
+
+	Serial.println(F("Initialize!"));
 
 	gameLogic = new glichess::GameLogic;
 }
 
 
 void ShutDown(glichess::GameLogic*& gameLogic) {
-	println(F("Shutdown!"));
+	Serial.println(F("Shutdown!"));
 
 	delete gameLogic;
 	gameLogic = nullptr;

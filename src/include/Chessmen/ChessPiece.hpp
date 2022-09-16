@@ -1,7 +1,7 @@
 #ifndef CHESSPIECE_H
 #define CHESSPIECE_H
 
-#include <Definitions.hpp>
+#include "../Definitions.hpp"
 
 
 namespace glichess {

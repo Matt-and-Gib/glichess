@@ -42,7 +42,7 @@
 .history/*
 
 # Builds
-build/*
+.build/*
 
 # CMake
 CMakeLists.txt.user

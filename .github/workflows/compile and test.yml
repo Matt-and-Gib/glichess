@@ -1,0 +1,50 @@
+name: Compile and Test
+
+on: [push, pull_request]
+
+concurrency:
+  group: atomic-car
+  cancel-in-progress: false
+
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: arduino/compile-sketches@v1.0.0
+        with:
+          fqbn: 'arduino:samd:nano_33_iot'
+          cli-compile-flags: |
+            - --warnings="all"
+#            - --build-property
+#            - compiler.cpp.extra_flags="-pedantic"
+#            - --build-property
+#            - compiler.cpp.extra_flags="-Wall"
+#            - --build-property
+#            - compiler.cpp.extra_flags="-Wextra"
+#            - --build-property
+#            - compiler.cpp.extra_flags="-Weffc++"
+          libraries: |
+#            - name: ArduinoJson
+#            - name: WiFiNINA
+#            - name: hd44780
+#            - name: SdFat
+#            - name: LiteChaCha
+#              source-url: https://github.com/DualJustice/LiteChaCha.git
+          sketch-paths: 'glichess.ino'
+
+  test:
+    needs: compile
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: jwlawson/actions-setup-cmake@v1.9
+    - name: Run CMake
+      run: cmake .
+    - name: make
+      run: make
+    - name: ctests
+      run: ctest

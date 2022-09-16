@@ -6,9 +6,10 @@
 namespace glichess {
 	class Pawn : protected ChessPiece {
 	public:
-		Pawn(const Side color, const unsigned char startPositionX, const unsigned char startPositionY): ChessPiece(color, startPositionX, startPositionY) {}
+		Pawn(const Side color, const unsigned char startPositionX, const unsigned char startPositionY);
+		virtual ~Pawn() = default;
 
-		void MoveTo(const unsigned char coordinateX, const unsigned char coordinateY) {}
+		void MoveTo(const unsigned char coordinateX, const unsigned char coordinateY);
 	};
 }
 

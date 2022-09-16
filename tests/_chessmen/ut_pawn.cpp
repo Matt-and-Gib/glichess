@@ -3,6 +3,7 @@
 
 
 int test_forward_movement_to_open_square() {
+	glichess::Pawn testPawn(glichess::Side::WHITE, 0, 1);
 	return 0;
 }
 
@@ -10,7 +11,7 @@ int test_forward_movement_to_open_square() {
 int main(int argc, char* argv[]) {
 	if(argc < 2) {
 		std::cout << "No test ID provided! Expecting unsigned int" << std::endl;
-		return 1;
+		return -1;
 	}
 
 	const unsigned short TEST_ID = atoi(argv[1]);

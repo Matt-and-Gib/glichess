@@ -1,5 +1,5 @@
-#ifndef DEFINITIONS_H
-#define DEFINITIONS_H
+#ifndef DEFINITIONS_HPP
+#define DEFINITIONS_HPP
 
 namespace glichess {
 	enum class Side : bool {WHITE, BLACK};

@@ -1,5 +1,5 @@
-#ifndef CORECOMPONENT_H
-#define CORECOMPONENT_H
+#ifndef CORECOMPONENT_HPP
+#define CORECOMPONENT_HPP
 
 namespace glichess {
 	class CoreComponent {

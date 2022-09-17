@@ -1,5 +1,5 @@
-#ifndef KING_H
-#define KING_H
+#ifndef KING_HPP
+#define KING_HPP
 
 #include "ChessPiece.hpp"
 

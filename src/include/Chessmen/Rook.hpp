@@ -1,5 +1,5 @@
-#ifndef ROOK_H
-#define ROOK_H
+#ifndef ROOK_HPP
+#define ROOK_HPP
 
 #include "ChessPiece.hpp"
 

@@ -1,5 +1,5 @@
-#ifndef PAWN_H
-#define PAWN_H
+#ifndef PAWN_HPP
+#define PAWN_HPP
 
 #include "ChessPiece.hpp"
 

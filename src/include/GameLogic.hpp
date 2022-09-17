@@ -1,5 +1,5 @@
-#ifndef GAMELOGIC_H
-#define GAMELOGIC_H
+#ifndef GAMELOGIC_HPP
+#define GAMELOGIC_HPP
 
 #include "CoreComponent.hpp"
 

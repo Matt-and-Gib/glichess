@@ -8,7 +8,8 @@ Network Connectivity:
 	Offline
 
 Features:
-	Save and restore in-progress games
+	Game input/output parsing
+		Save and restore in-progress games
 	Clock functionality
 
 Set Up:

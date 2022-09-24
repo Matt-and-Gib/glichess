@@ -1,0 +1,21 @@
+To-Do:
+	1. Robust linked list
+		2. Event queue
+	1. Core loop
+		2. System setup loop
+			3. Game setup loop
+				4. Game loop
+	1. Hardware
+		2. Hardware Input
+		2. Hardware Output
+	1. blutooth pairing
+		2. Network handshake
+	1. WiFi connectivity
+		2. lichess API Connectivity
+	1. Save game functionality
+		2. Restore game functionality
+	1. XML document parser
+		2. Game rule interpreter
+			3. Chess logic
+			3. Checkers logic
+			3. Tic-tac-toe logic

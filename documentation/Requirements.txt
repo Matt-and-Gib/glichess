@@ -1,0 +1,16 @@
+Supported Games:
+	Any games using up to an 8x8 grid
+		Ex. Chess, checkers, tic-tac-toe
+
+Network Connectivity:
+	blutooth
+	WiFi (lichess API)
+	Offline
+
+Features:
+	Save and restore in-progress games
+	Clock functionality
+
+Set Up:
+	Select basic game modes from buttons and LEDs (and an application in the future)
+	Set up pieces for selected game

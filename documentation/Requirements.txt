@@ -1,6 +1,6 @@
 Supported Games:
 	Any games using up to an 8x8 grid
-		Ex. Chess, checkers, tic-tac-toe
+		Ex. Chess, checkers, tic-tac-toe, connect 4
 
 Network Connectivity:
 	blutooth

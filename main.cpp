@@ -106,7 +106,7 @@ int main(void) {
 	MenuLoop(); //Ask the user what game they want to play
 
 	glichess::GameLogic* gameLogic = nullptr;
-	SetupGame(gameLogic) //Set up the selected game
+	SetupGame(gameLogic); //Set up the selected game
 
 	GameLoop(gameLogic); //The game
 

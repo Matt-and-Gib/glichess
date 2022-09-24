@@ -19,7 +19,7 @@ void clearSerialInputBuffer() {
 }
 
 
-void Initialize(glichess::GameLogic*& gameLogic) {
+void Initialize() {
 	Serial.begin(9600);
 	while(!Serial) {
 		delay(100);
@@ -27,14 +27,63 @@ void Initialize(glichess::GameLogic*& gameLogic) {
 
 	clearSerialInputBuffer();
 
-	Serial.println(F("Initialize!"));
+	Serial.println(F("Initialized!"));
 
-	gameLogic = new glichess::GameLogic;
+	/*
+		Read preferences
+		Read game options
+	*/
 }
 
 
-void ShutDown(glichess::GameLogic*& gameLogic) {
+void MenuLoop() {
+	/*
+		Read saved in-progress games
+		Display menu LED configuration
+		Listen for button presses
+			Change LEDs
+				Determine new game or restore
+			Detect "done" step to exit menu
+				Export chosen states to SetupGame
+	*/
+}
+
+
+void SetupGame(glichess::GameLogic*& gameLogic) {
+	gameLogic = new glichess::GameLogic;
+
+	/*
+		Connect to partner
+		Construct the game loop using its associated XML doc
+			Validate that all prerequisites are met for the chosen config
+		Display starting positions
+		Exit when physical game state matches internal state
+	*/
+}
+
+
+void GameLoop(glichess::GameLogic*& gameLogic) {
+	bool quit = false;
+	do {
+		/*
+			Input
+				Debounce
+			Game Logic
+				Save Game State to SD Card
+			Output
+			Network
+		*/
+	} while(!quit);
+}
+
+
+void ShutDownGame(glichess::GameLogic*& gameLogic) {
 	Serial.println(F("Shutdown!"));
+
+	/*
+		Record win/loss streak
+		Send network disconnect messages
+	*/
 
 	delete gameLogic;
 	gameLogic = nullptr;
@@ -52,16 +101,16 @@ int main(void) {
 	USBDevice.attach();
 #endif
 
+	Initialize(); //Set up our software
+
+	MenuLoop(); //Ask the user what game they want to play
+
 	glichess::GameLogic* gameLogic = nullptr;
+	SetupGame(gameLogic) //Set up the selected game
 
-	Initialize(gameLogic);
+	GameLoop(gameLogic); //The game
 
-	bool quit = false;
-	do {
-
-	} while(!quit);
-
-	ShutDown(gameLogic);
+	ShutDownGame(gameLogic);
 
 	if(arduino::serialEventRun) {
 		arduino::serialEventRun();

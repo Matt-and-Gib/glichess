@@ -1,1 +1,2 @@
-ADD_SUBDIRECTORY(_chessmen)
+#ADD_SUBDIRECTORY(_chess)
+#ADD_SUBDIRECTORY(_chessmen)

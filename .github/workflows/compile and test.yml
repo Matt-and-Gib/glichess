@@ -27,6 +27,7 @@ jobs:
 #            - --build-property
 #            - compiler.cpp.extra_flags="-Weffc++"
           libraries: |
+             - name: LibYxml
 #            - name: ArduinoJson
 #            - name: WiFiNINA
 #            - name: hd44780

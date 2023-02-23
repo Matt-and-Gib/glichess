@@ -73,6 +73,9 @@ void GameLoop(glichess::GameLogic*& gameLogic) {
 			Output
 			Network
 		*/
+		if(arduino::serialEventRun) {
+			arduino::serialEventRun();
+		}
 	} while(!quit);
 }
 
@@ -84,6 +87,10 @@ void ShutDownGame(glichess::GameLogic*& gameLogic) {
 		Record win/loss streak
 		Send network disconnect messages
 	*/
+
+	if(arduino::serialEventRun) {
+		arduino::serialEventRun();
+	}
 
 	delete gameLogic;
 	gameLogic = nullptr;
@@ -101,20 +108,13 @@ int main(void) {
 	USBDevice.attach();
 #endif
 
-	Initialize(); //Set up our software
-
-	MenuLoop(); //Ask the user what game they want to play
-
 	glichess::GameLogic* gameLogic = nullptr;
-	SetupGame(gameLogic); //Set up the selected game
 
-	GameLoop(gameLogic); //The game
-
+	Initialize();
+	MenuLoop();
+	SetupGame(gameLogic);
+	GameLoop(gameLogic);
 	ShutDownGame(gameLogic);
-
-	if(arduino::serialEventRun) {
-		arduino::serialEventRun();
-	}
 
 	return 0;
 }
